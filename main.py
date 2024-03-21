@@ -18,17 +18,6 @@ def find_pdf():
 	return None
 
 
-# TODO Доделать функцию, которая будет проверять наличие файла в папке
-def check_file(filename: str):
-	try:
-		if os.path.exists(filename) and os.path.isfile(filename):
-			return True
-		else:
-			ic(f' Тут моя хваленая ошибка{warnings['file_not_found']}')
-	except Exception as e:
-		ic(f'Ошибка{e}')
-
-
 def main():
 	savedir: str = os.getcwd()
 	ic(os.listdir())
