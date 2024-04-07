@@ -2,6 +2,7 @@ from pikepdf import Pdf
 import os
 from icecream import ic  # библиотека для отладки
 from time import sleep
+from warns.warns import warnings
 
 ic.disable()  # отключение модуля icecream, пока отладка не требуется
 
@@ -24,21 +25,13 @@ def main() -> None:
 
 	if find_pdf_tuple[0] > 1:
 		print(
-				f'{"-" * 20}\n'
-				f'Внимание! В директории находится больше одного pdf-файла!\n'
-				f'Пожалуйста, проверьте, чтобы в директории находился только один pdf-файл,\n'
-				f'закройте программу и повторите попытку\n'
-				f'{"-" * 20}\n'
+				warnings.get('manyfiles')
 		)
 		sleep(100)
 		quit()
 	elif find_pdf_tuple[0] == 0:
 		print(
-				f'{"-" * 20}\n'
-				f'Внимание! В директории нет ни единого pdf-файла!\n'
-				f'Пожалуйста, проверьте, чтобы в директории рядом с программой находился хотя бы один pdf-файл,\n'
-				f'закройте программу и повторите попытку\n'
-				f'{"-" * 20}\n'
+				warnings.get('nofile')
 		)
 		sleep(100)
 		quit()
