@@ -1,12 +1,14 @@
 from pikepdf import Pdf
 import os
-from icecream import ic  # библиотека для отладки
+from icecream import ic
 from time import sleep
-from warns.warns import warnings
+from warns.warns import project_warnings
+from functools import cache
 
-ic.disable()  # отключение модуля icecream, пока отладка не требуется
+ic.disable()  # отключение icecream, пока отладка не требуется
 
 
+@cache
 def find_pdf() -> tuple:
 	file_name: str = ''
 	pdf_count: int = 0
@@ -20,22 +22,19 @@ def find_pdf() -> tuple:
 def main() -> None:
 	savedir: str = os.getcwd()  # Сохраняем изначальную директорию
 
-	# Нужно для хранения кортежа из функции find_pdf(), для того, чтобы не запускать функцию каждый раз
-	find_pdf_tuple: tuple = find_pdf()
-
-	if find_pdf_tuple[0] > 1:
+	if find_pdf()[0] > 1:
 		print(
-				warnings.get('manyfiles')
+				project_warnings.get('manyfiles')
 		)
 		sleep(100)
 		quit()
-	elif find_pdf_tuple[0] == 0:
+	elif find_pdf()[0] == 0:
 		print(
-				warnings.get('nofile')
+				project_warnings.get('nofile')
 		)
 		sleep(100)
 		quit()
-	filename: str = find_pdf_tuple[1]
+	filename: str = find_pdf()[1]
 	# Данная часть кода выглядит довольно громоздкой, однако она выполняет необходимый функционал.
 	# Возможно, в будущем ее можно улучшить или вынести в отдельную функцию
 
@@ -52,7 +51,6 @@ def main() -> None:
 				sep_page: Pdf = Pdf.new()
 				sep_page.pages.append(page)
 				sep_page.save(f'Билет {n - (startfrom - 1)}.pdf')
-		# ic(f'Я создаль {n - (startfrom - 1)}.pdf')
 	os.chdir(savedir)  # Возвращаемся в исходную директорию
 
 

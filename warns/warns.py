@@ -1,4 +1,4 @@
-warnings: dict = {
+project_warnings: dict = {
 	'nofile':
 		f'{"-" * 20}\n'
 		f'Внимание! В директории нет ни одного pdf-файла!\n'
