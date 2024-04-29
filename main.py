@@ -1,7 +1,6 @@
 from pikepdf import Pdf
 import os
 from icecream import ic
-from time import sleep
 from warns.warns import project_warnings
 from functools import cache
 
@@ -26,13 +25,13 @@ def main() -> None:
 		print(
 				project_warnings.get('manyfiles')
 		)
-		sleep(100)
+		input()
 		quit()
 	elif find_pdf()[0] == 0:
 		print(
 				project_warnings.get('nofile')
 		)
-		sleep(100)
+		input()
 		quit()
 	filename: str = find_pdf()[1]
 	# Данная часть кода выглядит довольно громоздкой, однако она выполняет необходимый функционал.
